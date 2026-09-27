@@ -2,9 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Билборд - Продам гараж</title>
+    <title>Вертикальный Билборд - Градиент и Текст</title>
     <style>
-        /* Убираем все отступы и скроллбары */
         body, html {
             margin: 0;
             padding: 0;
@@ -12,108 +11,73 @@
             height: 100%;
             overflow: hidden;
             background-color: #000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Вертикальный билборд */
-        .billboard {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a15 60%, #000000 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        /* Мягкое световое пятно на фоне */
-        .billboard::before {
-            content: "";
+        /* Быстро переливающийся градиент */
+        .billboard-bg {
             position: absolute;
-            width: 90%;
-            height: 60%;
-            background: radial-gradient(circle, rgba(80, 120, 255, 0.18) 0%, transparent 70%);
-            animation: pulse 6s ease-in-out infinite;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            /* Скорость увеличена в 3 раза (было 10s, стало 3.3s) */
+            animation: gradientShift 3.3s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.9; transform: scale(1.15); }
-        }
-
-        /* Контейнер для вертикального текста */
-        .text {
-            position: relative;
+        /* Контейнер для контента с разворотом под вертикальный экран WebDisplays */
+        .content-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            font-family: 'Arial Black', 'Impact', sans-serif;
-            font-weight: 900;
-            text-transform: uppercase;
+            /* Поворот на 90 градусов, чтобы компенсировать разворот монитора в игре */
+            transform: rotate(90deg); 
+            white-space: nowrap;
+        }
+
+        /* Стилизация блока с эмодзи */
+        .emoji-container {
+            font-size: 110px; /* Большой размер для видимости издалека */
+            line-height: 1;
+            margin-bottom: 40px; /* Отступ перед текстом, чтобы он был чуть ниже середины */
+            filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.3));
+        }
+
+        /* Стилизация текста */
+        .promo-text {
             color: #ffffff;
-            line-height: 1.05;
-            letter-spacing: 0.03em;
-            padding: 4vh 6vw;
-            opacity: 0;
-            animation: epicAppear 6s ease-in-out infinite;
+            font-size: 48px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            /* Мощная тень, чтобы текст читался на любом цвете градиента */
+            text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6), 
+                         0px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
-        /* Каждое слово — крупно и вертикально */
-        .text span {
-            display: block;
-            font-size: 16vh; /* подстраивается под высоту экрана */
-            text-shadow:
-                0 0 20px rgba(120, 180, 255, 0.9),
-                0 0 40px rgba(80, 120, 255, 0.7),
-                0 0 80px rgba(50, 80, 200, 0.5);
-        }
-
-        /* Эпичное появление → удержание → исчезновение */
-        @keyframes epicAppear {
-            0% {
-                opacity: 0;
-                transform: scale(0.3) translateY(60px);
-                filter: blur(20px);
-            }
-            15% {
-                opacity: 1;
-                transform: scale(1.12) translateY(0);
-                filter: blur(0);
-            }
-            25% {
-                transform: scale(1) translateY(0);
-            }
-            70% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-                filter: blur(0);
-            }
-            85% {
-                opacity: 0;
-                transform: scale(1.35) translateY(-40px);
-                filter: blur(15px);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.3) translateY(60px);
-                filter: blur(20px);
-            }
-        }
-
-        /* Если экран очень узкий — уменьшаем шрифт */
-        @media (max-aspect-ratio: 1/2) {
-            .text span { font-size: 13vh; }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="billboard">
-        <div class="text">
-            <span>Продам</span>
-            <span>гараж</span>
+    <div class="billboard-bg">
+        <div class="content-wrapper">
+            <!-- Эмодзи телевизора, внутри которого эмодзи глобальной сети (интернета) -->
+            <div class="emoji-container">📺🌐</div>
+            
+            <!-- Надпись чуть ниже середины -->
+            <div class="promo-text">Реклама на этом экране</div>
         </div>
     </div>
 
