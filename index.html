@@ -14,12 +14,11 @@
             background-color: #000;
         }
 
-        /* Фон билборда — соотношение 2:1 (высота:ширина по визуалу) */
+        /* Вертикальный билборд */
         .billboard {
             position: relative;
             width: 100vw;
             height: 100vh;
-            /* Тёмный элегантный фон с лёгким свечением */
             background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a15 60%, #000000 100%);
             display: flex;
             align-items: center;
@@ -31,36 +30,44 @@
         .billboard::before {
             content: "";
             position: absolute;
-            width: 80%;
-            height: 80%;
-            background: radial-gradient(circle, rgba(80, 120, 255, 0.15) 0%, transparent 70%);
+            width: 90%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(80, 120, 255, 0.18) 0%, transparent 70%);
             animation: pulse 6s ease-in-out infinite;
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.9; transform: scale(1.1); }
+            50% { opacity: 0.9; transform: scale(1.15); }
         }
 
-        /* Сама надпись */
+        /* Контейнер для вертикального текста */
         .text {
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
             font-family: 'Arial Black', 'Impact', sans-serif;
-            font-size: 12vh;
             font-weight: 900;
-            letter-spacing: 0.05em;
             text-transform: uppercase;
             color: #ffffff;
-            text-align: center;
-            text-shadow:
-                0 0 20px rgba(120, 180, 255, 0.8),
-                0 0 40px rgba(80, 120, 255, 0.6),
-                0 0 80px rgba(50, 80, 200, 0.4);
+            line-height: 1.05;
+            letter-spacing: 0.03em;
+            padding: 4vh 6vw;
             opacity: 0;
-            transform: scale(0.5) translateY(30px);
             animation: epicAppear 6s ease-in-out infinite;
-            white-space: nowrap;
-            padding: 0 4vw;
+        }
+
+        /* Каждое слово — крупно и вертикально */
+        .text span {
+            display: block;
+            font-size: 16vh; /* подстраивается под высоту экрана */
+            text-shadow:
+                0 0 20px rgba(120, 180, 255, 0.9),
+                0 0 40px rgba(80, 120, 255, 0.7),
+                0 0 80px rgba(50, 80, 200, 0.5);
         }
 
         /* Эпичное появление → удержание → исчезновение */
@@ -72,7 +79,7 @@
             }
             15% {
                 opacity: 1;
-                transform: scale(1.15) translateY(0);
+                transform: scale(1.12) translateY(0);
                 filter: blur(0);
             }
             25% {
@@ -85,7 +92,7 @@
             }
             85% {
                 opacity: 0;
-                transform: scale(1.4) translateY(-40px);
+                transform: scale(1.35) translateY(-40px);
                 filter: blur(15px);
             }
             100% {
@@ -95,16 +102,19 @@
             }
         }
 
-        /* Адаптация под маленькие экраны */
-        @media (max-aspect-ratio: 2/1) {
-            .text { font-size: 10vh; }
+        /* Если экран очень узкий — уменьшаем шрифт */
+        @media (max-aspect-ratio: 1/2) {
+            .text span { font-size: 13vh; }
         }
     </style>
 </head>
 <body>
 
     <div class="billboard">
-        <div class="text">Продам гараж</div>
+        <div class="text">
+            <span>Продам</span>
+            <span>гараж</span>
+        </div>
     </div>
 
 </body>
