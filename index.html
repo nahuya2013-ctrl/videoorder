@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Вертикальный Билборд - Градиент и Текст</title>
+    <title>Вертикальный Билборд - Реклама</title>
     <style>
         body, html {
             margin: 0;
@@ -23,7 +23,6 @@
             height: 100%;
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
-            /* Скорость увеличена в 3 раза (было 10s, стало 3.3s) */
             animation: gradientShift 3.3s ease infinite;
             display: flex;
             justify-content: center;
@@ -37,29 +36,39 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            /* Поворот на 90 градусов, чтобы компенсировать разворот монитора в игре */
             transform: rotate(90deg); 
             white-space: nowrap;
         }
 
         /* Стилизация блока с эмодзи */
         .emoji-container {
-            font-size: 110px; /* Большой размер для видимости издалека */
+            font-size: 80px; /* Немного уменьшен для баланса с новым текстом */
             line-height: 1;
-            margin-bottom: 40px; /* Отступ перед текстом, чтобы он был чуть ниже середины */
+            margin-bottom: 25px; 
             filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.3));
         }
 
-        /* Стилизация текста */
+        /* Основной текст (уменьшен в 2.5 раза: был 48px, стал ~19px) */
         .promo-text {
             color: #ffffff;
-            font-size: 48px;
+            font-size: 19.2px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
-            /* Мощная тень, чтобы текст читался на любом цвете градиента */
-            text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6), 
+            margin-bottom: 15px; /* Отступ перед контактом */
+            text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6), 
                          0px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Текст с контактом Telegram (еще поменьше) */
+        .tg-contact {
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6), 
+                         0px 2px 4px rgba(0, 0, 0, 0.8);
+            opacity: 0.9; /* Слегка приглушенный цвет для второстепенного текста */
         }
 
         @keyframes gradientShift {
@@ -73,11 +82,14 @@
 
     <div class="billboard-bg">
         <div class="content-wrapper">
-            <!-- Эмодзи телевизора, внутри которого эмодзи глобальной сети (интернета) -->
+            <!-- Эмодзи телевизора и интернета -->
             <div class="emoji-container">📺🌐</div>
             
-            <!-- Надпись чуть ниже середины -->
+            <!-- Главная надпись (уменьшенная) -->
             <div class="promo-text">Реклама на этом экране</div>
+
+            <!-- Контакт в Telegram ниже -->
+            <div class="tg-contact">tg: @kochbrataan</div>
         </div>
     </div>
 
